@@ -112,8 +112,7 @@ export default function Playground({
   );
 
   const subscribedVolumes = useMultibandTrackVolume(
-    agentAudioTrack?.publication.track,
-    
+    agentAudioTrack?.publication.track
   );
 
   const localTracks = tracks.filter(
@@ -214,47 +213,47 @@ export default function Playground({
         ) : (
           <div className="flex flex-col items-center justify-center gap-2 text-gray-700 text-center h-full w-full">
             <LoadingSVG />
-            Waiting for video track
+            Waiting for video track wow
           </div>
         )}
       </div>
     );
   }, [agentVideoTrack, videoFit]);
 
-  const audioTileContent = useMemo(() => {
-    return (
-      <div className="flex items-center justify-center w-full">
-        {agentAudioTrack ? (
-          <AgentMultibandAudioVisualizer
-            state={agentState}
-            barWidth={30}
-            minBarHeight={30}
-            maxBarHeight={150}
-            accentColor={themeColor}
-            accentShade={500}
-            frequencies={subscribedVolumes}
-            borderRadius={12}
-            gap={16}
-          />
-        ) : (
-          <div className="flex flex-col items-center gap-2 text-gray-700 text-center w-full">
-            <LoadingSVG />
-            Waiting for audio track
-          </div>
-        )}
-      </div>
-    );
-  }, [agentAudioTrack, subscribedVolumes, themeColor, agentState]);
+  // const audioTileContent = useMemo(() => {
+  //   return (
+  //     <div className="flex items-center justify-center w-full">
+  //       {agentAudioTrack ? (
+  //         <AgentMultibandAudioVisualizer
+  //           state={agentState}
+  //           barWidth={30}
+  //           minBarHeight={30}
+  //           maxBarHeight={150}
+  //           accentColor={themeColor}
+  //           accentShade={500}
+  //           frequencies={subscribedVolumes}
+  //           borderRadius={12}
+  //           gap={16}
+  //         />
+  //       ) : (
+  //         <div className="flex flex-col items-center gap-2 text-gray-700 text-center w-full">
+  //           <LoadingSVG />
+  //           Waiting for audio track
+  //         </div>
+  //       )}
+  //     </div>
+  //   );
+  // }, [agentAudioTrack, subscribedVolumes, themeColor, agentState]);
 
-  const chatTileContent = useMemo(() => {
-    return (
-      <ChatTile
-        messages={messages}
-        accentColor={themeColor}
-        onSend={sendChat}
-      />
-    );
-  }, [messages, themeColor, sendChat]);
+  // const chatTileContent = useMemo(() => {
+  //   return (
+  //     <ChatTile
+  //       messages={messages}
+  //       accentColor={themeColor}
+  //       onSend={sendChat}
+  //     />
+  //   );
+  // }, [messages, themeColor, sendChat]);
 
   const settingsTileContent = useMemo(() => {
     return (
@@ -394,26 +393,26 @@ export default function Playground({
     });
   }
 
-  if (outputs?.includes(PlaygroundOutputs.Audio)) {
-    mobileTabs.push({
-      title: "Audio",
-      content: (
-        <PlaygroundTile
-          className="w-full h-full grow"
-          childrenClassName="justify-center"
-        >
-          {audioTileContent}
-        </PlaygroundTile>
-      ),
-    });
-  }
+  // if (outputs?.includes(PlaygroundOutputs.Audio)) {
+  //   mobileTabs.push({
+  //     title: "Audio",
+  //     content: (
+  //       <PlaygroundTile
+  //         className="w-full h-full grow"
+  //         childrenClassName="justify-center"
+  //       >
+  //         {audioTileContent}
+  //       </PlaygroundTile>
+  //     ),
+  //   });
+  // }
 
-  if (outputs?.includes(PlaygroundOutputs.Chat)) {
-    mobileTabs.push({
-      title: "Chat",
-      content: chatTileContent,
-    });
-  }
+  // if (outputs?.includes(PlaygroundOutputs.Chat)) {
+  //   mobileTabs.push({
+  //     title: "Chat",
+  //     content: chatTileContent,
+  //   });
+  // }
 
   mobileTabs.push({
     title: "Settings",
@@ -470,7 +469,7 @@ export default function Playground({
               {videoTileContent}
             </PlaygroundTile>
           )}
-          {outputs?.includes(PlaygroundOutputs.Audio) && (
+          {/* {outputs?.includes(PlaygroundOutputs.Audio) && (
             <PlaygroundTile
               title="Audio"
               className="w-full h-full grow"
@@ -478,17 +477,17 @@ export default function Playground({
             >
               {audioTileContent}
             </PlaygroundTile>
-          )}
+          )} */}
         </div>
 
-        {outputs?.includes(PlaygroundOutputs.Chat) && (
+        {/* {outputs?.includes(PlaygroundOutputs.Chat) && (
           <PlaygroundTile
             title="Chat"
             className="h-full grow basis-1/4 hidden lg:flex"
           >
             {chatTileContent}
           </PlaygroundTile>
-        )}
+        )} */}
         <PlaygroundTile
           padding={false}
           backgroundColor="gray-950"
