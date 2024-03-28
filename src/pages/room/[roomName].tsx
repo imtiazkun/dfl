@@ -37,6 +37,7 @@ const themeColors = [
 const RoomPage = () => {
   const router = useRouter();
   const { roomName } = router.query;
+  const { patient, name } = router.query;
   const [shouldConnect, setShouldConnect] = useState(false);
   const [metadata, setMetadata] = useState<PlaygroundMeta[]>([]);
 
@@ -47,12 +48,17 @@ const RoomPage = () => {
     type: ToastType;
   } | null>(null);
   const token = useToken("/api/token", roomName as string, {
-    userInfo: { identity: generateRandomAlphanumeric(16) },
+    userInfo: {
+      name: name,
+      identity: generateRandomAlphanumeric(16),
+      metadata: patient == "true" ? "patient" : "",
+    },
   });
 
   useEffect(() => {
     // You might want to auto-connect based on certain conditions or leave it to user action
     // setShouldConnect(true);
+    setShouldConnect(true);
   }, []);
 
   const appConfig = useAppConfig();
@@ -68,12 +74,6 @@ const RoomPage = () => {
         <title>LiveKit Room: {roomName}</title>
       </Head>
       <main className="h-screen bg-gray-100">
-        <button
-          onClick={() => setShouldConnect(true)}
-          className="p-2 bg-blue-500 text-white rounded"
-        >
-          Connect to LiveKit Room
-        </button>
         {shouldConnect && token && (
           <LiveKitRoom
             className="flex-1"
@@ -99,14 +99,14 @@ const RoomPage = () => {
               videoFit={appConfig?.video_fit ?? "contain"}
             />
 
-            <VideoConference
+            {/* <VideoConference
               chatMessageFormatter={formatChatMessageLinks}
               SettingsComponent={
                 process.env.NEXT_PUBLIC_SHOW_SETTINGS_MENU === "true"
                   ? SettingsMenu
                   : undefined
               }
-            />
+            /> */}
           </LiveKitRoom>
         )}
       </main>

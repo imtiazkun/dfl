@@ -34,7 +34,7 @@ export default function CreateRoom() {
         value={roomName}
         onChange={(e) => setRoomName(e.target.value)}
       />
-      <button onClick={handleCreateRoom}>Create Room</button>
+      <button onClick={handleCreateRoom}>Join</button>
     </div>
   );
 }

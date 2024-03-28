@@ -176,7 +176,7 @@ export default function Playground({
   useEffect(() => {
     const allMessages = [...transcripts];
     for (const msg of chatMessages) {
-      const isAgent = msg.from?.identity === agentParticipant?.identity;
+      const isAgent = msg.from?.identity === agentParticipant?.isAgent;
       const isSelf = msg.from?.identity === localParticipant?.identity;
       let name = msg.from?.name;
       if (!name) {
@@ -208,10 +208,10 @@ export default function Playground({
         {agentVideoTrack ? (
           <VideoTrack
             trackRef={agentVideoTrack}
-            className={`absolute top-1/2 -translate-y-1/2 ${videoFitClassName} object-position-center w-full h-full`}
+            className={`absolute top-1/2 -translate-y-1/2 ${videoFitClassName} object-position-center w-full h-screen`}
           />
         ) : (
-          <div className="flex flex-col items-center justify-center gap-2 text-gray-700 text-center h-full w-full">
+          <div className="flex flex-col items-center justify-center gap-2 text-gray-700 text-center h-48 w-full">
             <LoadingSVG />
             Waiting for video track wow
           </div>
