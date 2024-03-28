@@ -245,15 +245,15 @@ export default function Playground({
   //   );
   // }, [agentAudioTrack, subscribedVolumes, themeColor, agentState]);
 
-  // const chatTileContent = useMemo(() => {
-  //   return (
-  //     <ChatTile
-  //       messages={messages}
-  //       accentColor={themeColor}
-  //       onSend={sendChat}
-  //     />
-  //   );
-  // }, [messages, themeColor, sendChat]);
+  const chatTileContent = useMemo(() => {
+    return (
+      <ChatTile
+        messages={messages}
+        accentColor={themeColor}
+        onSend={sendChat}
+      />
+    );
+  }, [messages, themeColor, sendChat]);
 
   const settingsTileContent = useMemo(() => {
     return (
@@ -480,14 +480,14 @@ export default function Playground({
           )} */}
         </div>
 
-        {/* {outputs?.includes(PlaygroundOutputs.Chat) && (
+        {outputs?.includes(PlaygroundOutputs.Chat) && (
           <PlaygroundTile
             title="Chat"
             className="h-full grow basis-1/4 hidden lg:flex"
           >
             {chatTileContent}
           </PlaygroundTile>
-        )} */}
+        )}
         <PlaygroundTile
           padding={false}
           backgroundColor="gray-950"

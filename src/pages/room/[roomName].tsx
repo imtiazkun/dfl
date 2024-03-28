@@ -12,6 +12,7 @@ import {
   useTracks,
   VideoTrack,
   LiveKitRoom,
+  GridLayout,
 } from "@livekit/components-react";
 import { generateRandomAlphanumeric } from "@/lib/util";
 import Playground, {
@@ -32,21 +33,6 @@ const themeColors = [
   "pink",
   "teal",
 ];
-
-// Dynamically import LiveKit components to avoid SSR issues
-// const LiveKitRoom = dynamic(
-//   () => import("@livekit/components-react").then((mod) => mod.LiveKitRoom),
-//   { ssr: false }
-// );
-// const RoomAudioRenderer = dynamic(
-//   () =>
-//     import("@livekit/components-react").then((mod) => mod.RoomAudioRenderer),
-//   { ssr: false }
-// );
-// const StartAudio = dynamic(
-//   () => import("@livekit/components-react").then((mod) => mod.StartAudio),
-//   { ssr: false }
-// );
 
 const RoomPage = () => {
   const router = useRouter();
@@ -112,14 +98,15 @@ const RoomPage = () => {
               metadata={metadata}
               videoFit={appConfig?.video_fit ?? "contain"}
             />
-            {/* <VideoConference
+
+            <VideoConference
               chatMessageFormatter={formatChatMessageLinks}
               SettingsComponent={
                 process.env.NEXT_PUBLIC_SHOW_SETTINGS_MENU === "true"
                   ? SettingsMenu
                   : undefined
               }
-            /> */}
+            />
           </LiveKitRoom>
         )}
       </main>
