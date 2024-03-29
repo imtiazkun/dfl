@@ -220,30 +220,7 @@ export default function Playground({
     );
   }, [agentVideoTrack, videoFit]);
 
-  // const audioTileContent = useMemo(() => {
-  //   return (
-  //     <div className="flex items-center justify-center w-full">
-  //       {agentAudioTrack ? (
-  //         <AgentMultibandAudioVisualizer
-  //           state={agentState}
-  //           barWidth={30}
-  //           minBarHeight={30}
-  //           maxBarHeight={150}
-  //           accentColor={themeColor}
-  //           accentShade={500}
-  //           frequencies={subscribedVolumes}
-  //           borderRadius={12}
-  //           gap={16}
-  //         />
-  //       ) : (
-  //         <div className="flex flex-col items-center gap-2 text-gray-700 text-center w-full">
-  //           <LoadingSVG />
-  //           Waiting for audio track
-  //         </div>
-  //       )}
-  //     </div>
-  //   );
-  // }, [agentAudioTrack, subscribedVolumes, themeColor, agentState]);
+
 
   const chatTileContent = useMemo(() => {
     return (
@@ -255,182 +232,156 @@ export default function Playground({
     );
   }, [messages, themeColor, sendChat]);
 
-  const settingsTileContent = useMemo(() => {
-    return (
-      <div className="flex flex-col gap-4 h-full w-full items-start overflow-y-auto">
-        {description && (
-          <ConfigurationPanelItem title="Description">
-            {description}
-          </ConfigurationPanelItem>
-        )}
+  // const settingsTileContent = useMemo(() => {
+  //   return (
+  //     <div className="flex flex-col gap-4 h-full w-full items-start overflow-y-auto">
+  //       {/* {description && (
+  //         <ConfigurationPanelItem title="Description">
+  //           {description}
+  //         </ConfigurationPanelItem>
+  //       )} */}
 
-        <ConfigurationPanelItem title="Settings">
-          <div className="flex flex-col gap-2">
-            {metadata?.map((data, index) => (
-              <NameValueRow
-                key={data.name + index}
-                name={data.name}
-                value={data.value}
-              />
-            ))}
-          </div>
-        </ConfigurationPanelItem>
-        <ConfigurationPanelItem title="Status">
-          <div className="flex flex-col gap-2">
-            <NameValueRow
-              name="Room connected"
-              value={
-                roomState === ConnectionState.Connecting ? (
-                  <LoadingSVG diameter={16} strokeWidth={2} />
-                ) : (
-                  roomState
-                )
-              }
-              valueColor={
-                roomState === ConnectionState.Connected
-                  ? `${themeColor}-500`
-                  : "gray-500"
-              }
-            />
-            <NameValueRow
-              name="Agent connected"
-              value={
-                isAgentConnected ? (
-                  "true"
-                ) : roomState === ConnectionState.Connected ? (
-                  <LoadingSVG diameter={12} strokeWidth={2} />
-                ) : (
-                  "false"
-                )
-              }
-              valueColor={isAgentConnected ? `${themeColor}-500` : "gray-500"}
-            />
-            <NameValueRow
-              name="Agent status"
-              value={
-                agentState !== "offline" && agentState !== "speaking" ? (
-                  <div className="flex gap-2 items-center">
-                    <LoadingSVG diameter={12} strokeWidth={2} />
-                    {agentState}
-                  </div>
-                ) : (
-                  agentState
-                )
-              }
-              valueColor={
-                agentState === "speaking" ? `${themeColor}-500` : "gray-500"
-              }
-            />
-          </div>
-        </ConfigurationPanelItem>
-        {localVideoTrack && (
-          <ConfigurationPanelItem
-            title="Camera"
-            deviceSelectorKind="videoinput"
-          >
-            <div className="relative">
-              <VideoTrack
-                className="rounded-sm border border-gray-800 opacity-70 w-full"
-                trackRef={localVideoTrack}
-              />
-            </div>
-          </ConfigurationPanelItem>
-        )}
-        {localMicTrack && (
-          <ConfigurationPanelItem
-            title="Microphone"
-            deviceSelectorKind="audioinput"
-          >
-            <AudioInputTile frequencies={localMultibandVolume} />
-          </ConfigurationPanelItem>
-        )}
-        <div className="w-full">
-          <ConfigurationPanelItem title="Color">
-            <ColorPicker
-              colors={themeColors}
-              selectedColor={themeColor}
-              onSelect={(color) => {
-                setThemeColor(color);
-              }}
-            />
-          </ConfigurationPanelItem>
-        </div>
-        {showQR && (
-          <div className="w-full">
-            <ConfigurationPanelItem title="QR Code">
-              <QRCodeSVG value={window.location.href} width="128" />
-            </ConfigurationPanelItem>
-          </div>
-        )}
-      </div>
-    );
-  }, [
-    agentState,
-    description,
-    isAgentConnected,
-    localMicTrack,
-    localMultibandVolume,
-    localVideoTrack,
-    metadata,
-    roomState,
-    themeColor,
-    themeColors,
-    showQR,
-  ]);
+  //       {/* <ConfigurationPanelItem title="Settings">
+  //         <div className="flex flex-col gap-2">
+  //           {metadata?.map((data, index) => (
+  //             <NameValueRow
+  //               key={data.name + index}
+  //               name={data.name}
+  //               value={data.value}
+  //             />
+  //           ))}
+  //         </div>
+  //       </ConfigurationPanelItem> */}
+  //       {/* <ConfigurationPanelItem title="Status">
+  //         <div className="flex flex-col gap-2">
+  //           <NameValueRow
+  //             name="Room connected"
+  //             value={
+  //               roomState === ConnectionState.Connecting ? (
+  //                 <LoadingSVG diameter={16} strokeWidth={2} />
+  //               ) : (
+  //                 roomState
+  //               )
+  //             }
+  //             valueColor={
+  //               roomState === ConnectionState.Connected
+  //                 ? `${themeColor}-500`
+  //                 : "gray-500"
+  //             }
+  //           />
+  //           <NameValueRow
+  //             name="Agent connected"
+  //             value={
+  //               isAgentConnected ? (
+  //                 "true"
+  //               ) : roomState === ConnectionState.Connected ? (
+  //                 <LoadingSVG diameter={12} strokeWidth={2} />
+  //               ) : (
+  //                 "false"
+  //               )
+  //             }
+  //             valueColor={isAgentConnected ? `${themeColor}-500` : "gray-500"}
+  //           />
+  //           <NameValueRow
+  //             name="Agent status"
+  //             value={
+  //               agentState !== "offline" && agentState !== "speaking" ? (
+  //                 <div className="flex gap-2 items-center">
+  //                   <LoadingSVG diameter={12} strokeWidth={2} />
+  //                   {agentState}
+  //                 </div>
+  //               ) : (
+  //                 agentState
+  //               )
+  //             }
+  //             valueColor={
+  //               agentState === "speaking" ? `${themeColor}-500` : "gray-500"
+  //             }
+  //           />
+  //         </div>
+  //       </ConfigurationPanelItem> */}
+  //       {/* {localVideoTrack && (
+  //         <ConfigurationPanelItem
+  //           title="Camera"
+  //           deviceSelectorKind="videoinput"
+  //         >
+  //           <div className="relative">
+  //             <VideoTrack
+  //               className="rounded-sm border border-gray-800 opacity-70 w-full"
+  //               trackRef={localVideoTrack}
+  //             />
+  //           </div>
+  //         </ConfigurationPanelItem>
+  //       )}
+  //       {localMicTrack && (
+  //         <ConfigurationPanelItem
+  //           title="Microphone"
+  //           deviceSelectorKind="audioinput"
+  //         >
+  //           <AudioInputTile frequencies={localMultibandVolume} />
+  //         </ConfigurationPanelItem>
+  //       )} */}
+  //       <div className="w-full">
+  //         {/* <ConfigurationPanelItem title="Color">
+  //           <ColorPicker
+  //             colors={themeColors}
+  //             selectedColor={themeColor}
+  //             onSelect={(color) => {
+  //               setThemeColor(color);
+  //             }}
+  //           />
+  //         </ConfigurationPanelItem> */}
+  //       </div>
+        
+  //     </div>
+  //   );
+  // }, [
+  //   agentState,
+  //   description,
+  //   isAgentConnected,
+  //   localMicTrack,
+  //   localMultibandVolume,
+  //   localVideoTrack,
+  //   metadata,
+  //   roomState,
+  //   themeColor,
+  //   themeColors,
 
-  let mobileTabs: PlaygroundTab[] = [];
-  if (outputs?.includes(PlaygroundOutputs.Video)) {
-    mobileTabs.push({
-      title: "Video",
-      content: (
-        <PlaygroundTile
-          className="w-full h-full"
-          childrenClassName="justify-center"
-        >
-          {videoTileContent}
-        </PlaygroundTile>
-      ),
-    });
-  }
+  // ]);
 
-  // if (outputs?.includes(PlaygroundOutputs.Audio)) {
+  // let mobileTabs: PlaygroundTab[] = [];
+  // if (outputs?.includes(PlaygroundOutputs.Video)) {
   //   mobileTabs.push({
-  //     title: "Audio",
+  //     title: "Video",
   //     content: (
   //       <PlaygroundTile
-  //         className="w-full h-full grow"
+  //         className="w-full h-full"
   //         childrenClassName="justify-center"
   //       >
-  //         {audioTileContent}
+  //         {videoTileContent}
   //       </PlaygroundTile>
   //     ),
   //   });
   // }
 
-  // if (outputs?.includes(PlaygroundOutputs.Chat)) {
-  //   mobileTabs.push({
-  //     title: "Chat",
-  //     content: chatTileContent,
-  //   });
-  // }
 
-  mobileTabs.push({
-    title: "Settings",
-    content: (
-      <PlaygroundTile
-        padding={false}
-        backgroundColor="gray-950"
-        className="h-full w-full basis-1/4 items-start overflow-y-auto flex"
-        childrenClassName="h-full grow items-start"
-      >
-        {settingsTileContent}
-      </PlaygroundTile>
-    ),
-  });
+  // mobileTabs.push({
+  //   title: "Settings",
+  //   content: (
+  //     <PlaygroundTile
+  //       padding={false}
+  //       backgroundColor="gray-950"
+  //       className="h-full w-full basis-1/4 items-start overflow-y-auto flex"
+  //       childrenClassName="h-full grow items-start"
+  //     >
+  //       {settingsTileContent}
+  //     </PlaygroundTile>
+  //   ),
+  // });
 
   return (
     <>
-      <PlaygroundHeader
+      {/* <PlaygroundHeader
         title={title}
         logo={logo}
         githubLink={githubLink}
@@ -440,18 +391,18 @@ export default function Playground({
         onConnectClicked={() =>
           onConnect(roomState === ConnectionState.Disconnected)
         }
-      />
+      /> */}
       <div
         className={`flex gap-4 py-4 grow w-full selection:bg-${themeColor}-900`}
         style={{ height: `calc(100% - ${headerHeight}px)` }}
       >
-        <div className="flex flex-col grow basis-1/2 gap-4 h-full lg:hidden">
+        {/* <div className="flex flex-col grow basis-1/2 gap-4 h-full lg:hidden">
           <PlaygroundTabbedTile
             className="h-full"
             tabs={mobileTabs}
             initialTab={mobileTabs.length - 1}
           />
-        </div>
+        </div> */}
         <div
           className={`flex-col grow basis-1/2 gap-4 h-full hidden lg:${
             !outputs?.includes(PlaygroundOutputs.Audio) &&
@@ -469,33 +420,24 @@ export default function Playground({
               {videoTileContent}
             </PlaygroundTile>
           )}
-          {/* {outputs?.includes(PlaygroundOutputs.Audio) && (
-            <PlaygroundTile
-              title="Audio"
-              className="w-full h-full grow"
-              childrenClassName="justify-center"
-            >
-              {audioTileContent}
-            </PlaygroundTile>
-          )} */}
         </div>
 
-        {outputs?.includes(PlaygroundOutputs.Chat) && (
+        {/* {outputs?.includes(PlaygroundOutputs.Chat) && (
           <PlaygroundTile
             title="Chat"
             className="h-full grow basis-1/4 hidden lg:flex"
           >
             {chatTileContent}
           </PlaygroundTile>
-        )}
-        <PlaygroundTile
+        )} */}
+        {/* <PlaygroundTile
           padding={false}
           backgroundColor="gray-950"
           className="h-full w-full basis-1/4 items-start overflow-y-auto hidden max-w-[480px] lg:flex"
           childrenClassName="h-full grow items-start"
         >
           {settingsTileContent}
-        </PlaygroundTile>
+        </PlaygroundTile> */}
       </div>
     </>
   );

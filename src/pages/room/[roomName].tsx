@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import "@livekit/components-styles";
 import {
   VideoConference,
   formatChatMessageLinks,
@@ -13,6 +14,7 @@ import {
   VideoTrack,
   LiveKitRoom,
   GridLayout,
+  ParticipantTile,
 } from "@livekit/components-react";
 import { generateRandomAlphanumeric } from "@/lib/util";
 import Playground, {
@@ -22,6 +24,7 @@ import Playground, {
 import { useAppConfig } from "@/hooks/useAppConfig";
 import { SettingsMenu } from "../../lib/SettingsMenu";
 import { PlaygroundToast, ToastType } from "@/components/toast/PlaygroundToast";
+import { Participant } from "livekit-client";
 
 const themeColors = [
   "cyan",
@@ -40,7 +43,7 @@ const RoomPage = () => {
   const { patient, name } = router.query;
   const [shouldConnect, setShouldConnect] = useState(false);
   const [metadata, setMetadata] = useState<PlaygroundMeta[]>([]);
-
+  // const tracks = useTracks([Track.Source.Camera, Track.Source.ScreenShare]);
   // Assume you have an endpoint to fetch or generate a token based on roomName
   // For simplicity, using a mocked function here
   const [toastMessage, setToastMessage] = useState<{
@@ -75,39 +78,41 @@ const RoomPage = () => {
       </Head>
       <main className="h-screen bg-gray-100">
         {shouldConnect && token && (
-          <LiveKitRoom
-            className="flex-1"
-            serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL || ""}
-            token={token}
-            audio={appConfig?.inputs.mic}
-            video={appConfig?.inputs.camera}
-            connect={shouldConnect}
-            onError={(e) => console.error(e)}
-          >
-            {/* Additional components like VideoConference could be added here */}
-            {/* <RoomAudioRenderer />
-            <StartAudio label="Click to enable audio playback" /> */}
-            <Playground
-              title={appConfig?.title}
-              githubLink={appConfig?.github_link}
-              outputs={outputs}
-              showQR={appConfig?.show_qr}
-              description={appConfig?.description}
-              themeColors={themeColors}
-              defaultColor={appConfig?.theme_color ?? "cyan"}
-              metadata={metadata}
-              videoFit={appConfig?.video_fit ?? "contain"}
-            />
-
-            <VideoConference
-              chatMessageFormatter={formatChatMessageLinks}
-              SettingsComponent={
-                process.env.NEXT_PUBLIC_SHOW_SETTINGS_MENU === "true"
-                  ? SettingsMenu
-                  : undefined
-              }
-            />
-          </LiveKitRoom>
+          <div className="bg-gray-100">
+            <LiveKitRoom
+              className="flex-1"
+              serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL || ""}
+              token={token}
+              audio={appConfig?.inputs.mic}
+              video={appConfig?.inputs.camera}
+              connect={shouldConnect}
+              onError={(e) => console.error(e)}
+            >
+              <div className="flex ">
+                <div className="w-1/4">
+                  <Playground
+                    title={appConfig?.title}
+                    githubLink={appConfig?.github_link}
+                    outputs={outputs}
+                    showQR={appConfig?.show_qr}
+                    description={appConfig?.description}
+                    themeColors={themeColors}
+                    defaultColor={appConfig?.theme_color ?? "cyan"}
+                    metadata={metadata}
+                    videoFit={appConfig?.video_fit ?? "contain"}
+                  />
+                </div>
+                <VideoConference
+                  chatMessageFormatter={formatChatMessageLinks}
+                  SettingsComponent={
+                    process.env.NEXT_PUBLIC_SHOW_SETTINGS_MENU === "true"
+                      ? SettingsMenu
+                      : undefined
+                  }
+                />
+              </div>
+            </LiveKitRoom>
+          </div>
         )}
       </main>
     </>

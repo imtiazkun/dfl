@@ -171,6 +171,11 @@
     clsx "2.1.0"
     usehooks-ts "2.14.0"
 
+"@livekit/components-styles@^1.0.10":
+  version "1.0.10"
+  resolved "https://registry.npmjs.org/@livekit/components-styles/-/components-styles-1.0.10.tgz"
+  integrity sha512-WCTtXnMAcZiXgo2N+1SmlcpPwltpGp8fW+x83P9OnHHTK3qrKEzfcfKi1z0xS8VMu/KKLgJm+yhAlCmZPme/RA==
+
 "@livekit/krisp-noise-filter@^0.2.1":
   version "0.2.1"
   resolved "https://registry.npmjs.org/@livekit/krisp-noise-filter/-/krisp-noise-filter-0.2.1.tgz"
