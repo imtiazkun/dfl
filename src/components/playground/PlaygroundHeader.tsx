@@ -19,7 +19,7 @@ export const PlaygroundHeader = ({
   githubLink,
   accentColor,
   height,
-  onConnectClicked,
+  // onConnectClicked,
   connectionState,
 }: PlaygroundHeader) => {
   return (
@@ -47,14 +47,11 @@ export const PlaygroundHeader = ({
             <GithubSVG />
           </a>
         )}
-        <Button
+        {/* <Button
           accentColor={
             connectionState === ConnectionState.Connected ? "red" : accentColor
           }
           disabled={connectionState === ConnectionState.Connecting}
-          onClick={() => {
-            onConnectClicked();
-          }}
         >
           {connectionState === ConnectionState.Connecting ? (
             <LoadingSVG />
@@ -63,7 +60,7 @@ export const PlaygroundHeader = ({
           ) : (
             "Connect"
           )}
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
