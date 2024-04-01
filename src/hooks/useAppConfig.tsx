@@ -42,7 +42,7 @@ export const useAppConfig = (): AppConfig => {
   if (APP_CONFIG) {
     try {
       const parsedConfig = jsYaml.load(APP_CONFIG);
-      console.log("parsedConfig:", parsedConfig);
+      // console.log("parsedConfig:", parsedConfig);
       return parsedConfig as AppConfig;
     } catch (e) {
       console.error("Error parsing app config:", e);
