@@ -39,7 +39,9 @@ body {
   width: 10px;
   border-radius: 5px;
 }
-
+.lk-chat {
+  height: 100vh !important;
+}
 
 /* Excerpt of the color palette  */
 :root {
