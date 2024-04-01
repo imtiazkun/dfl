@@ -60,7 +60,9 @@ const HomePage: NextPage = () => {
         </button>
 
         <div className="flex text-white gap-5">
-          <p>Patient: {isPatient ? "Patient" : "Doctor"}</p>
+          <p className="flex align-middle justify-center">
+            Patient?{isPatient}
+          </p>
           <input
             checked={isPatient}
             onChange={(e) => setPatient(e.target.checked)}
