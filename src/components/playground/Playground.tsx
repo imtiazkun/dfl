@@ -349,20 +349,20 @@ export default function Playground({
 
   // ]);
 
-  // let mobileTabs: PlaygroundTab[] = [];
-  // if (outputs?.includes(PlaygroundOutputs.Video)) {
-  //   mobileTabs.push({
-  //     title: "Video",
-  //     content: (
-  //       <PlaygroundTile
-  //         className="w-full h-full"
-  //         childrenClassName="justify-center"
-  //       >
-  //         {videoTileContent}
-  //       </PlaygroundTile>
-  //     ),
-  //   });
-  // }
+  let mobileTabs: PlaygroundTab[] = [];
+  if (outputs?.includes(PlaygroundOutputs.Video)) {
+    mobileTabs.push({
+      title: "Video",
+      content: (
+        <PlaygroundTile
+          className="w-full h-full"
+          childrenClassName="justify-center"
+        >
+          {videoTileContent}
+        </PlaygroundTile>
+      ),
+    });
+  }
 
 
   // mobileTabs.push({
@@ -396,13 +396,13 @@ export default function Playground({
         className={`flex gap-4 py-4 grow w-full selection:bg-${themeColor}-900`}
         style={{ height: `calc(100% - ${headerHeight}px)` }}
       >
-        {/* <div className="flex flex-col grow basis-1/2 gap-4 h-full lg:hidden">
+        <div className="flex flex-col grow basis-1/2 gap-4 h-full lg:hidden">
           <PlaygroundTabbedTile
             className="h-full"
             tabs={mobileTabs}
             initialTab={mobileTabs.length - 1}
           />
-        </div> */}
+        </div>
         <div
           className={`flex-col grow basis-1/2 gap-4 h-full hidden lg:${
             !outputs?.includes(PlaygroundOutputs.Audio) &&

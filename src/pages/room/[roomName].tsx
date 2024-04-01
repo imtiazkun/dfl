@@ -88,8 +88,8 @@ const RoomPage = () => {
               connect={shouldConnect}
               onError={(e) => console.error(e)}
             >
-              <div className="flex ">
-                <div className="w-1/4">
+              <div className="flex  flex-col  md:flex-row">
+                <div className="w-full  gap-4 md:gap-4 md:w-1/2">
                   <Playground
                     title={appConfig?.title}
                     githubLink={appConfig?.github_link}
@@ -102,14 +102,16 @@ const RoomPage = () => {
                     videoFit={appConfig?.video_fit ?? "contain"}
                   />
                 </div>
-                <VideoConference
-                  chatMessageFormatter={formatChatMessageLinks}
-                  SettingsComponent={
-                    process.env.NEXT_PUBLIC_SHOW_SETTINGS_MENU === "true"
-                      ? SettingsMenu
-                      : undefined
-                  }
-                />
+                <div className="w-full md:w-1/2">
+                  <VideoConference
+                    chatMessageFormatter={formatChatMessageLinks}
+                    SettingsComponent={
+                      process.env.NEXT_PUBLIC_SHOW_SETTINGS_MENU === "true"
+                        ? SettingsMenu
+                        : undefined
+                    }
+                  />
+                </div>
               </div>
             </LiveKitRoom>
           </div>

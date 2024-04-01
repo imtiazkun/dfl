@@ -39,6 +39,8 @@ body {
   width: 10px;
   border-radius: 5px;
 }
+
+
 /* Excerpt of the color palette  */
 :root {
   --lk-fg: #111;
@@ -68,6 +70,7 @@ body {
   --lk-connection-excellent: #06db4d;
   --lk-connection-good: #f9b11f;
   --lk-connection-poor: #f91f31;
+  /* --lk-control-hover-bg: transparent; */
 }
 @keyframes fadeIn {
   0% {
