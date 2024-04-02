@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "@livekit/components-react": "^2.0.0",
-    "@livekit/components-styles": "^1.0.10",
     "@livekit/krisp-noise-filter": "^0.2.1",
     "framer-motion": "^10.16.16",
     "js-yaml": "^4.1.0",
+    "jwt-decode": "^4.0.0",
     "livekit-client": "^2.0.2",
     "livekit-server-sdk": "^2.0.3",
     "next": "^14.0.4",

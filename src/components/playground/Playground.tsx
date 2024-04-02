@@ -204,7 +204,7 @@ export default function Playground({
   const videoTileContent = useMemo(() => {
     const videoFitClassName = `object-${videoFit}`;
     return (
-      <div className="flex flex-col w-full grow text-gray-950 bg-black rounded-sm border border-gray-800 relative">
+      <div className="flex flex-col grow text-gray-950 bg-black rounded-sm border border-gray-800 fixed top-0 left-0 w-1/2 h-screen items-center justify-center">
         {agentVideoTrack ? (
           <VideoTrack
             trackRef={agentVideoTrack}
@@ -219,8 +219,6 @@ export default function Playground({
       </div>
     );
   }, [agentVideoTrack, videoFit]);
-
-
 
   const chatTileContent = useMemo(() => {
     return (
@@ -332,7 +330,7 @@ export default function Playground({
   //           />
   //         </ConfigurationPanelItem> */}
   //       </div>
-        
+
   //     </div>
   //   );
   // }, [
@@ -363,7 +361,6 @@ export default function Playground({
       ),
     });
   }
-
 
   // mobileTabs.push({
   //   title: "Settings",
@@ -396,13 +393,6 @@ export default function Playground({
         className={`flex gap-4 py-4 grow w-full selection:bg-${themeColor}-900`}
         style={{ height: `calc(100% - ${headerHeight}px)` }}
       >
-        <div className="flex flex-col grow basis-1/2 gap-4 h-full lg:hidden">
-          <PlaygroundTabbedTile
-            className="h-full"
-            tabs={mobileTabs}
-            initialTab={mobileTabs.length - 1}
-          />
-        </div>
         <div
           className={`flex-col grow basis-1/2 gap-4 h-full hidden lg:${
             !outputs?.includes(PlaygroundOutputs.Audio) &&

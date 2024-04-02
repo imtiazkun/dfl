@@ -2,83 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+
 body {
-  background: black;
+    background-color: black;
 }
 
-#__next {
-  width: 100%;
-  height: 100dvh;
+.lk-participant-placeholder {
+    display: none;
 }
 
-.repeating-square-background {
-  background-size: 18px 18px;
-  background-repeat: repeat;
-  background-image: url("data:image/svg+xml,%3Csvg width='18' height='18' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='2' height='2' fill='rgba(255, 255, 255, 0.03)' /%3E%3C/svg%3E");
+
+.lk-participant-metadata {
+    display: none;
 }
 
-.cursor-animation {
-  animation: fadeIn 0.5s ease-in-out alternate-reverse infinite;
+.lk-participant-media-video {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50vw;
+    height: 100vh;
+    object-fit: cover;
 }
 
-::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 5px;
-}
 
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Even lighter grey thumb on hover */
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-  border-radius: 5px;
-}
-.lk-chat {
-  height: 100vh !important;
-}
-
-/* Excerpt of the color palette  */
-:root {
-  --lk-fg: #111;
-  --lk-fg-secondary: #333;
-  --lk-fg-tertiary: #555;
-
-  --lk-bg: #fff;
-  --lk-bg-secondary: #f5f5f5;
-  --lk-bg-tertiary: #fafafa;
-
-  --lk-accent-fg: #fff;
-  --lk-accent-bg: #1f8cf9;
-
-  --lk-danger-fg: #fff;
-  --lk-danger: #f91f31;
-  --lk-danger-text: #6d0311;
-  --lk-danger-bg: #fecdd4;
-
-  --lk-success-fg: #fff;
-  --lk-success: #1ff968;
-  --lk-success-text: #036d26;
-  --lk-success-bg: #cdfedd;
-
-  --lk-control-fg: var(--fg);
-  --lk-control-bg: var(--bg-secondary);
-
-  --lk-connection-excellent: #06db4d;
-  --lk-connection-good: #f9b11f;
-  --lk-connection-poor: #f91f31;
-  /* --lk-control-hover-bg: transparent; */
-}
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+.leaveRoomBtn {
+    position: absolute;
+    bottom: 1em;
+    right: 50%;
+    transform: translateX(50%);
+    background-color: rgb(177, 44, 44);
+    padding: 0.5em 2em;
+    border-radius: 25px;
+    font-weight: bold;
+    color: white;
 }
