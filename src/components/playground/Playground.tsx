@@ -81,6 +81,8 @@ export default function Playground({
   const [transcripts, setTranscripts] = useState<ChatMessageType[]>([]);
   const { localParticipant } = useLocalParticipant();
 
+  const [showChat, setShowChat] = useState(false);
+
   const participants = useRemoteParticipants({
     updateOnlyOn: [RoomEvent.ParticipantMetadataChanged],
   });
@@ -213,7 +215,7 @@ export default function Playground({
         ) : (
           <div className="flex flex-col items-center justify-center gap-2 text-gray-700 text-center h-48 w-full">
             <LoadingSVG />
-            Waiting for video track wow
+            Waiting for video track
           </div>
         )}
       </div>
@@ -412,14 +414,14 @@ export default function Playground({
           )}
         </div>
 
-        {/* {outputs?.includes(PlaygroundOutputs.Chat) && (
+        {outputs?.includes(PlaygroundOutputs.Chat) && (
           <PlaygroundTile
             title="Chat"
             className="h-full grow basis-1/4 hidden lg:flex"
           >
-            {chatTileContent}
+            {showChat ? chatTileContent : ""}
           </PlaygroundTile>
-        )} */}
+        )}
         {/* <PlaygroundTile
           padding={false}
           backgroundColor="gray-950"
@@ -428,6 +430,27 @@ export default function Playground({
         >
           {settingsTileContent}
         </PlaygroundTile> */}
+        <button
+          onClick={() => setShowChat(!showChat)}
+          className="fixed bottom-5 right-5 z-50 bg-black p-3 rounded-full"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon icon-tabler icon-tabler-messages"
+            width="44"
+            height="44"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#ffffff"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+            <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+          </svg>
+        </button>
       </div>
     </>
   );

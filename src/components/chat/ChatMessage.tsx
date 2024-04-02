@@ -12,7 +12,7 @@ export const ChatMessage = ({
   isSelf,
 }: ChatMessageProps) => {
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 px-6">
       <div
         className={`text-${
           isSelf ? "gray-700" : accentColor + "-800 text-ts-" + accentColor

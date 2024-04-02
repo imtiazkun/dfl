@@ -20,6 +20,7 @@ type ChatTileProps = {
 
 export const ChatTile = ({ messages, accentColor, onSend }: ChatTileProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (containerRef.current) {
       containerRef.current.scrollTop = containerRef.current.scrollHeight;
@@ -27,7 +28,9 @@ export const ChatTile = ({ messages, accentColor, onSend }: ChatTileProps) => {
   }, [containerRef, messages]);
 
   return (
-    <div className="flex flex-col gap-4 w-full h-full">
+    <div
+      className={`flex flex-col gap-4 h-full fixed bg-black bottom-0 right-0 z-50 w-1/3 px-10}`}
+    >
       <div
         ref={containerRef}
         className="overflow-y-auto"

@@ -69,10 +69,6 @@ const Conf = () => {
     (item) => item.participant.metadata != "patient"
   );
 
-  useEffect(() => {
-    // alert(JSON.stringify(trackRefs));
-  }, [trackRefs]);
-
   return (
     <>
       <TrackLoop tracks={filteredTracks}>
@@ -135,7 +131,7 @@ const RoomPage = () => {
         <title>DFL Meet</title>
       </Head>
 
-      <div className="fixed z-50 top-5 left-5 bg-blue-600 px-5 py-2 rounded-lg font-bold text-white bg-black">
+      <div className="fixed z-50 top-5 left-5  px-5 py-2 rounded-lg font-bold text-white bg-black">
         {roomName}
       </div>
 

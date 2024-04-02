@@ -20,7 +20,7 @@ body {
     position: absolute;
     top: 0;
     right: 0;
-    width: 50vw;
+    width: 233;
     height: 100vh;
     object-fit: cover;
 }
@@ -36,4 +36,36 @@ body {
     border-radius: 25px;
     font-weight: bold;
     color: white;
+}
+
+@media only screen and (max-width: 767px) {
+    /* Styles for small screens */
+    body {
+        background-color: blue;
+    }
+
+    .lk-participant-media-video {
+        width: 100%;
+        height: auto;
+    }
+
+    .leaveRoomBtn {
+        bottom: 2em;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    /* Styles for large screens */
+    body {
+        background-color: red;
+    }
+
+    .lk-participant-media-video {
+        width: 100%;
+        height: auto;
+    }
+
+    .leaveRoomBtn {
+        bottom: 3em;
+    }
 }
