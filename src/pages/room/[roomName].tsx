@@ -120,7 +120,7 @@ const RoomPage = () => {
 
   const appConfig = useAppConfig();
   const outputs = [
-    appConfig?.outputs.audio && PlaygroundOutputs.Audio,
+    // appConfig?.outputs.audio && PlaygroundOutputs.Audio,
     appConfig?.outputs.video && PlaygroundOutputs.Video,
     appConfig?.outputs.chat && PlaygroundOutputs.Chat,
   ].filter((item) => typeof item !== "boolean") as PlaygroundOutputs[];
@@ -143,7 +143,7 @@ const RoomPage = () => {
                 className="flex-1"
                 serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL || ""}
                 token={token}
-                audio={appConfig?.inputs.mic}
+                // audio={appConfig?.inputs.mic}
                 video={appConfig?.inputs.camera}
                 connect={shouldConnect}
                 onError={(e) => console.error(e)}
