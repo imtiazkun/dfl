@@ -97,6 +97,7 @@ const RoomPage = () => {
 
   const token = useToken("/api/token", roomName as string, {
     userInfo: {
+      name: name as string,
       identity: generateRandomAlphanumeric(16),
       metadata: patient == "true" ? "patient" : "",
     },
@@ -120,7 +121,7 @@ const RoomPage = () => {
 
   const appConfig = useAppConfig();
   const outputs = [
-    // appConfig?.outputs.audio && PlaygroundOutputs.Audio,
+    appConfig?.outputs.audio && PlaygroundOutputs.Audio,
     appConfig?.outputs.video && PlaygroundOutputs.Video,
     appConfig?.outputs.chat && PlaygroundOutputs.Chat,
   ].filter((item) => typeof item !== "boolean") as PlaygroundOutputs[];
@@ -143,7 +144,7 @@ const RoomPage = () => {
                 className="flex-1"
                 serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL || ""}
                 token={token}
-                // audio={appConfig?.inputs.mic}
+                audio={appConfig?.inputs.mic}
                 video={appConfig?.inputs.camera}
                 connect={shouldConnect}
                 onError={(e) => console.error(e)}
@@ -176,7 +177,7 @@ const RoomPage = () => {
               </LiveKitRoom>
 
               <button
-                className="leaveRoomBtn"
+                className="leaveRoomBtn hover:bg-red-500 hover:shadow-rose"
                 onClick={() => {
                   setShouldConnect(false);
                   window.location.href = "/";
@@ -190,13 +191,14 @@ const RoomPage = () => {
       ) : (
         <div>
           <div className="flex flex-col items-center justify-center h-screen">
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center gap-4">
               <button
                 onClick={() => setShouldConnect(true)}
-                className="px-16 text-white bg-blue-500 text-3xl py-6 hover:bg-blue-300 transition-all"
+                className="px-16 text-white bg-blue-500 text-2xl py-3 rounded-lg hover:bg-blue-300 transition-all"
               >
-                Start
+                Ready
               </button>
+              <h2 className="text-gray-400">Join whenever you are ready</h2>
             </div>
           </div>
         </div>

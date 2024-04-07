@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 
+* {
+    transition: all 0.3s;
+}
+
 body {
     background-color: black;
 }
@@ -40,10 +44,6 @@ body {
 
 @media only screen and (max-width: 767px) {
     /* Styles for small screens */
-    body {
-        background-color: blue;
-    }
-
     .lk-participant-media-video {
         width: 100%;
         height: auto;
@@ -56,10 +56,7 @@ body {
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
     /* Styles for large screens */
-    body {
-        background-color: red;
-    }
-
+  
     .lk-participant-media-video {
         width: 100%;
         height: auto;
