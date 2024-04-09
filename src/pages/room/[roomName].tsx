@@ -73,9 +73,8 @@ const Conf = () => {
   return (
     <>
       <TrackLoop tracks={filteredTracks}>
-        <ParticipantTile>
-          <AudioTrack />
-        </ParticipantTile>
+        <ParticipantTile />
+          {/* <AudioTrack trackRef={} /> */}
       </TrackLoop>
     </>
   );
