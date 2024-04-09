@@ -23,6 +23,7 @@ import {
   GridLayout,
   ParticipantTile,
   TrackLoop,
+  AudioTrack,
 } from "@livekit/components-react";
 import { generateRandomAlphanumeric } from "@/lib/util";
 import Playground, {
@@ -72,7 +73,9 @@ const Conf = () => {
   return (
     <>
       <TrackLoop tracks={filteredTracks}>
-        <ParticipantTile />
+        <ParticipantTile>
+          <AudioTrack />
+        </ParticipantTile>
       </TrackLoop>
     </>
   );

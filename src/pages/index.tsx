@@ -107,7 +107,7 @@ const HomePage: NextPage = () => {
 
         <div className="flex text-white gap-5 ">
           <p className="flex align-middle justify-center">
-            Join as {isPatient ? "Patient" : "Doctor"}
+            Join as Patient
           </p>
           <input
             checked={isPatient}
