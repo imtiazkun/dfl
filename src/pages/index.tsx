@@ -27,7 +27,7 @@ const HomePage: NextPage = () => {
   }, [roomName]);
 
   return (
-    <div className="flex flex-col items-start justify-center min-h-screen container mx-auto px-10">
+    <div className="flex flex-col items-start justify-center min-h-screen container mx-auto px-10 bg-gray-900">
       <Head>
         <title>DFLive Meet</title>
       </Head>
@@ -106,9 +106,7 @@ const HomePage: NextPage = () => {
         </button>
 
         <div className="flex text-white gap-5 ">
-          <p className="flex align-middle justify-center">
-            Join as Patient
-          </p>
+          <p className="flex align-middle justify-center">Join as Patient</p>
           <input
             checked={isPatient}
             onChange={(e) => setPatient(e.target.checked)}
