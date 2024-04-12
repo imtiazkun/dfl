@@ -22,7 +22,7 @@ const HomePage: NextPage = () => {
     if (roomName) {
       window.location.href = `/room/${encodeURIComponent(
         roomName
-      )}?patient=${isPatient}&name=${name}`;
+      )}?patient=${isPatient}&name=${isPatient ? "Patient" : name}`;
     }
   }, [roomName]);
 
