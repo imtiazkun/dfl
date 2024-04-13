@@ -27,15 +27,15 @@ const HomePage: NextPage = () => {
   }, [roomName]);
 
   return (
-    <div className="flex flex-col items-start justify-center min-h-screen container mx-auto px-10 bg-gray-900">
+    <div className="flex flex-col items-start justify-center min-h-screen container mx-auto px-10 ">
       <Head>
-        <title>Persona </title>
+        <title>Persona</title>
       </Head>
 
       <div className="flex flex-col gap-2">
         <div className="text-white mb-4 text-left">
           <h1 className="text-white font-bold text-6xl">Persona </h1>
-          <p>Anonymous conference for mental health care</p>
+          <p>Anonymous group psychotherapy for mental health care</p>
         </div>
 
         {!isPatient ? (
