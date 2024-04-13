@@ -171,6 +171,7 @@ const RoomPage = () => {
                       title="Leave call"
                       className="leaveRoomBtn bg-red-500 rounded-full hover:shadow-rose"
                       onClick={() => {
+                        // Don't redirect before the connection has been stopped
                         setShouldConnect(false);
                       }}
                     >
@@ -202,7 +203,7 @@ const RoomPage = () => {
           <div className="flex flex-col items-center justify-center h-screen">
             <div className="flex flex-col items-center gap-4">
               <button
-                onClick={() => setShouldConnect(true)}
+                onClick={() => setTimeout(() => setShouldConnect(true), 2000)}
                 className="px-16 text-white bg-blue-500 text-2xl py-3 rounded-lg hover:bg-blue-300 transition-all"
               >
                 Ready
