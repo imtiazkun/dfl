@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    background-color: #272727;
+}rgb(31, 31, 31)
 
 .lk-grid-layout {
     width: 50vw;
