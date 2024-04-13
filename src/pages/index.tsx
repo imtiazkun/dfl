@@ -29,12 +29,12 @@ const HomePage: NextPage = () => {
   return (
     <div className="flex flex-col items-start justify-center min-h-screen container mx-auto px-10">
       <Head>
-        <title>DFLive Meet</title>
+        <title>Persona</title>
       </Head>
 
       <div className="flex flex-col gap-2">
         <div className="text-white mb-4 text-left">
-          <h1 className="text-white font-bold text-6xl">DFLive </h1>
+          <h1 className="text-white font-bold text-6xl">Persona </h1>
           <p>Anonymous conference for mental health care</p>
         </div>
 
@@ -90,11 +90,11 @@ const HomePage: NextPage = () => {
             width="28"
             height="28"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="#ffffff"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
@@ -106,9 +106,7 @@ const HomePage: NextPage = () => {
         </button>
 
         <div className="flex text-white gap-5 ">
-          <p className="flex align-middle justify-center">
-            Join as Patient
-          </p>
+          <p className="flex align-middle justify-center">Join as Patient</p>
           <input
             checked={isPatient}
             onChange={(e) => setPatient(e.target.checked)}
