@@ -172,7 +172,6 @@ const RoomPage = () => {
                       className="leaveRoomBtn bg-red-500 rounded-full hover:shadow-rose"
                       onClick={() => {
                         setShouldConnect(false);
-                        window.location.href = "/";
                       }}
                     >
                       <svg
