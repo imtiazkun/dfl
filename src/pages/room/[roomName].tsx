@@ -24,6 +24,7 @@ import {
   ParticipantTile,
   TrackLoop,
   AudioTrack,
+  RoomAudioRenderer,
 } from "@livekit/components-react";
 import { generateRandomAlphanumeric } from "@/lib/util";
 import Playground, {
@@ -72,9 +73,9 @@ const Conf = () => {
 
   return (
     <>
-      <TrackLoop tracks={filteredTracks}>
+      <GridLayout tracks={filteredTracks}>
         <ParticipantTile />
-      </TrackLoop>
+      </GridLayout>
     </>
   );
 };
@@ -141,6 +142,7 @@ const RoomPage = () => {
                 connect={shouldConnect}
                 onError={(e) => console.error(e)}
               >
+                <RoomAudioRenderer />
                 <div className="flex  flex-col  md:flex-row h-screen">
                   <div className="w-full  gap-4 md:gap-4 md:w-1/2 h-screen">
                     <Playground

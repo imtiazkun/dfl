@@ -46,7 +46,7 @@ video.lk-participant-media-video {
     height: 300;
 }
 
-[data-lk-video-muted="false"].lk-participant-placeholder  {
+[data-lk-video-muted="false"] .lk-participant-placeholder  {
     display: none;
 }
 
@@ -62,7 +62,6 @@ video.lk-participant-media-video {
     justify-content: space-between;
     align-items: center;
 }
-
 
 
 .leaveRoomBtn {
