@@ -29,7 +29,7 @@ const HomePage: NextPage = () => {
   return (
     <div className="flex flex-col items-start justify-center min-h-screen container mx-auto px-10 bg-gray-900">
       <Head>
-        <title>Persona</title>
+        <title>Persona </title>
       </Head>
 
       <div className="flex flex-col gap-2">
