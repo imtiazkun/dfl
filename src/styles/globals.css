@@ -46,10 +46,6 @@ video.lk-participant-media-video {
     height: 300;
 }
 
-[data-lk-video-muted="false"] .lk-participant-placeholder  {
-    display: none;
-}
-
 .lk-participant-metadata {
     position: absolute;
     bottom: 0;

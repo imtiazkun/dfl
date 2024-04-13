@@ -33,7 +33,6 @@ import Playground, {
 import { useAppConfig } from "@/hooks/useAppConfig";
 import { SettingsMenu } from "../../lib/SettingsMenu";
 import { PlaygroundToast, ToastType } from "@/components/toast/PlaygroundToast";
-import { Participant, RoomEvent, Track } from "livekit-client";
 import { jwtDecode } from "jwt-decode";
 
 const themeColors = [
