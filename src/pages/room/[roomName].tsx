@@ -11,6 +11,7 @@ import {
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import "@livekit/components-styles";
 import {
   VideoConference,
   formatChatMessageLinks,
@@ -36,6 +37,7 @@ import { SettingsMenu } from "../../lib/SettingsMenu";
 import { PlaygroundToast, ToastType } from "@/components/toast/PlaygroundToast";
 import { Participant, RoomEvent, Track } from "livekit-client";
 import { jwtDecode } from "jwt-decode";
+import DoctorInterface from "@/components/DoctorComponent/DoctorInterface";
 
 const themeColors = [
   "cyan",
@@ -80,6 +82,12 @@ const Conf = () => {
   );
 };
 
+interface CustomJwtPayload {
+  exp?: number; // Standard JWT field (optional)
+  iat?: number; // Standard JWT field (optional)
+  metadata?: string; // Custom field you expect
+}
+
 const RoomPage = () => {
   const router = useRouter();
   const { roomName } = router.query;
@@ -107,10 +115,21 @@ const RoomPage = () => {
 
   useEffect(() => {
     if (token) {
-      const decoded = jwtDecode(token) as any;
-      setIsPatient(decoded == "patient");
+      try {
+        // Use the extended interface for decoding the JWT
+        const decoded = jwtDecode<CustomJwtPayload>(token);
+        console.log(decoded); // Log the decoded token for debugging
+
+        if (decoded.metadata) {
+          // Assume metadata is directly the role for simplicity
+          setIsPatient(decoded.metadata === "patient");
+        }
+      } catch (error) {
+        console.error("Error decoding token or invalid token format:", error);
+        setIsPatient(false); // Set default or handle error
+      }
     }
-  }, []);
+  }, [token]); // Depend on `token` to rerun when it changes
 
   const appConfig = useAppConfig();
   const outputs = [
@@ -118,7 +137,7 @@ const RoomPage = () => {
     appConfig?.outputs.video && PlaygroundOutputs.Video,
     appConfig?.outputs.chat && PlaygroundOutputs.Chat,
   ].filter((item) => typeof item !== "boolean") as PlaygroundOutputs[];
-
+  console.log("shouldConnect:", shouldConnect, "isPatient:", isPatient);
   return (
     <>
       <Head>
@@ -130,74 +149,120 @@ const RoomPage = () => {
       </div>
 
       {shouldConnect ? (
-        <main ref={videoContainer} className="h-screen bg-gray-100">
-          {token && (
-            <div className="bg-gray-800">
+        isPatient == true ? (
+          <main ref={videoContainer} className="h-screen bg-gray-100 patient">
+            {token && (
+              <div className="bg-gray-800">
+                <LiveKitRoom
+                  className="flex-1"
+                  serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL || ""}
+                  token={token}
+                  audio={appConfig?.inputs.mic}
+                  video={appConfig?.inputs.camera}
+                  connect={shouldConnect}
+                  onError={(e) => console.error(e)}
+                >
+                  <RoomAudioRenderer />
+                  <div className="flex  flex-col  md:flex-row h-screen">
+                    <div className="w-full  gap-4 md:gap-4 md:w-1/2 h-screen">
+                      <Playground
+                        title={appConfig?.title}
+                        githubLink={appConfig?.github_link}
+                        outputs={outputs}
+                        showQR={appConfig?.show_qr}
+                        description={appConfig?.description}
+                        themeColors={themeColors}
+                        defaultColor={appConfig?.theme_color ?? "cyan"}
+                        metadata={metadata}
+                        videoFit={appConfig?.video_fit ?? "contain"}
+                        onConnect={function (
+                          connect: boolean,
+                          opts?: { token: string; url: string } | undefined
+                        ): void {
+                          throw new Error("Function not implemented.");
+                        }}
+                      />
+                    </div>
+                    <div className="w-full md:w-1/2 h-screen">
+                      <Conf />
+                    </div>
+                    <div className="fixed z-0 bottom-5 left-5  px-5 py-2 rounded-lg font-bold text-white bg-black">
+                      <button
+                        title="Leave call"
+                        className="leaveRoomBtn bg-red-500 rounded-full hover:shadow-rose"
+                        onClick={() => {
+                          // Don't redirect before the connection has been stopped
+                          setShouldConnect(false);
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="icon icon-tabler icon-tabler-phone-off"
+                          width="28"
+                          height="28"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="#ffffff"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path d="M3 21l18 -18" />
+                          <path d="M5.831 14.161a15.946 15.946 0 0 1 -2.831 -8.161a2 2 0 0 1 2 -2h4l2 5l-2.5 1.5c.108 .22 .223 .435 .345 .645m1.751 2.277c.843 .84 1.822 1.544 2.904 2.078l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a15.963 15.963 0 0 1 -10.344 -4.657" />
+                        </svg>
+                      </button>{" "}
+                    </div>
+                  </div>
+                </LiveKitRoom>
+              </div>
+            )}
+          </main>
+        ) : (
+          <>
+            {token && (
               <LiveKitRoom
-                className="flex-1"
                 serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL || ""}
                 token={token}
                 audio={appConfig?.inputs.mic}
                 video={appConfig?.inputs.camera}
                 connect={shouldConnect}
                 onError={(e) => console.error(e)}
+                data-lk-theme="default"
               >
-                <RoomAudioRenderer />
-                <div className="flex  flex-col  md:flex-row h-screen">
-                  <div className="w-full  gap-4 md:gap-4 md:w-1/2 h-screen">
-                    <Playground
-                      title={appConfig?.title}
-                      githubLink={appConfig?.github_link}
-                      outputs={outputs}
-                      showQR={appConfig?.show_qr}
-                      description={appConfig?.description}
-                      themeColors={themeColors}
-                      defaultColor={appConfig?.theme_color ?? "cyan"}
-                      metadata={metadata}
-                      videoFit={appConfig?.video_fit ?? "contain"}
-                      onConnect={function (
-                        connect: boolean,
-                        opts?: { token: string; url: string } | undefined
-                      ): void {
-                        throw new Error("Function not implemented.");
-                      }}
-                    />
-                  </div>
-                  <div className="w-full md:w-1/2 h-screen">
-                    <Conf />
-                  </div>
-                  <div className="fixed z-0 bottom-5 left-5  px-5 py-2 rounded-lg font-bold text-white bg-black">
-                    <button
-                      title="Leave call"
-                      className="leaveRoomBtn bg-red-500 rounded-full hover:shadow-rose"
-                      onClick={() => {
-                        // Don't redirect before the connection has been stopped
-                        setShouldConnect(false);
-                      }}
+                {/* <div className="h-screen"> */}
+                <VideoConference />
+                <div className="absolute z-50 bottom-5 right-5  px-5 py-2 rounded-lg font-bold text-white ">
+                  <button
+                    title="Leave call"
+                    className="leaveRoomBtn bg-red-500 rounded-full hover:shadow-rose"
+                    onClick={() => {
+                      // Don't redirect before the connection has been stopped
+                      setShouldConnect(false);
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-phone-off"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#ffffff"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon icon-tabler icon-tabler-phone-off"
-                        width="28"
-                        height="28"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="#ffffff"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M3 21l18 -18" />
-                        <path d="M5.831 14.161a15.946 15.946 0 0 1 -2.831 -8.161a2 2 0 0 1 2 -2h4l2 5l-2.5 1.5c.108 .22 .223 .435 .345 .645m1.751 2.277c.843 .84 1.822 1.544 2.904 2.078l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a15.963 15.963 0 0 1 -10.344 -4.657" />
-                      </svg>
-                    </button>{" "}
-                  </div>
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M3 21l18 -18" />
+                      <path d="M5.831 14.161a15.946 15.946 0 0 1 -2.831 -8.161a2 2 0 0 1 2 -2h4l2 5l-2.5 1.5c.108 .22 .223 .435 .345 .645m1.751 2.277c.843 .84 1.822 1.544 2.904 2.078l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a15.963 15.963 0 0 1 -10.344 -4.657" />
+                    </svg>
+                  </button>{" "}
                 </div>
               </LiveKitRoom>
-            </div>
-          )}
-        </main>
+            )}
+          </>
+        )
       ) : (
         <div>
           <div className="flex flex-col items-center justify-center h-screen">
