@@ -66,6 +66,7 @@ body {
   display: none !important;
 }
 .lk-room-container {
+  position: fixed !important;
   height: 100vh !important;
 }
 .leaveRoomBtn {
@@ -73,4 +74,9 @@ body {
   color: white;
   border: none;
   cursor: pointer;
+}
+@media only screen and (max-width: 510px) {
+  .mobile_button {
+    margin-bottom: 50px;
+  }
 }

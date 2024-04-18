@@ -65,10 +65,9 @@ const AgentFeed = () => {
     </>
   );
 };
-
+// item.participant.metadata != "patient"
 const Conf = () => {
   const trackRefs = useTracks([Track.Source.Camera]);
-
   const filteredTracks = trackRefs.filter(
     (item) => item.participant.metadata != "patient"
   );
@@ -183,7 +182,7 @@ const RoomPage = () => {
                         }}
                       />
                     </div>
-                    <div className="w-full md:w-1/2 h-screen">
+                    <div className="w-full md:w-1/2 h-screen patient">
                       <Conf />
                     </div>
                     <div className="fixed z-0 bottom-5 left-5  px-5 py-2 rounded-lg font-bold text-white bg-black">
@@ -232,7 +231,7 @@ const RoomPage = () => {
               >
                 {/* <div className="h-screen"> */}
                 <VideoConference />
-                <div className="absolute z-50 bottom-5 right-5  px-5 py-2 rounded-lg font-bold text-white ">
+                <div className="absolute z-50 bottom-5 right-5  px-5 py-2 rounded-lg font-bold text-white mobile_button">
                   <button
                     title="Leave call"
                     className="leaveRoomBtn bg-red-500 rounded-full hover:shadow-rose"
