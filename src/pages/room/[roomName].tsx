@@ -37,7 +37,6 @@ import { SettingsMenu } from "../../lib/SettingsMenu";
 import { PlaygroundToast, ToastType } from "@/components/toast/PlaygroundToast";
 import { Participant, RoomEvent, Track } from "livekit-client";
 import { jwtDecode } from "jwt-decode";
-import DoctorInterface from "@/components/DoctorComponent/DoctorInterface";
 
 const themeColors = [
   "cyan",
